@@ -206,10 +206,8 @@ export class DevicesComponent implements OnInit {
         if(response){
           this.dev = response;
           this.arrayDev = this.dev;
-          //console.log(this.dev);
           for (var index in response){
             this.arrayDev[Number(index)] = response[Number(index)];
-            //console.log(this.arrayDev[Number(index)]);
           }
         }
       },
@@ -222,6 +220,7 @@ export class DevicesComponent implements OnInit {
     this._userService.updateDeviceInRoom(this.idUser as String, room,device, devRoom).subscribe(
       response =>{
         console.log("cambio Room");
+        //console.log("cambio Room");
       },
       error =>{
 
