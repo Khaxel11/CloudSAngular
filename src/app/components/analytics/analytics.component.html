@@ -1,0 +1,189 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let dev of arrayDev; let indice = index" >
+        <div class="card p-3 mb-2">
+            <div class="d-flex justify-content-between">
+                <div class="ms-2 c-details">
+                    <h6 class="mb-0">Aire:</h6> 
+                   
+                    <span >{{arrayDev[indice].id}}</span>
+                    <h6 class="mb-0">Estado:</h6>
+                    <span *ngIf="arrayDev[indice].state == 0" style="color: red;">Apagado</span>
+                    <span *ngIf="arrayDev[indice].state == 1" style="color: green;">Encendido</span>
+                    
+
+                </div>
+                <div class="d-flex flex-row align-items-center">
+                    <div class="ms-2 c-details">
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mt-2">
+              <h6 class="heading">Temperatura:</h6>  
+              <h3 class="heading">{{arrayDev[indice].temperature}}</h3>
+                <span >Ver Reportes</span>
+
+                <div class="mt-2 d-flex justify-content-center" >
+                    <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices" (click)="getAnalyticsTemperature(idUser,indice,month,today)">
+                        <i class="fas fa-print" style="margin-right: 5px;"></i>
+                        Temperatura
+                      </button>
+                      <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices" style="margin-left: 25px;" (click)="getAnalyticsStates(idUser,indice,month,today)">
+                        <i class="fas fa-print" style="margin-right: 5px;"></i>
+                        Encendidos
+                      </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="width: 40%;" *ngIf="tempShowSelect == 1 && stateShowSelect == 0">
+  <strong class="mt-2">Día: </strong>
+  <input type="date" id="start" name="trip-start" [(ngModel)]="dateB"
+    min="2022-01-01" max="2022-12-31" (change)="onChangeDate(idUser,clickedIndex)">
+
+  <div class="row mt-4">
+    Variación de Temperatura: 
+    <canvas class="chart-wrapper" 
+      baseChart
+      [legend]="true"
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [type] = "'bar'"
+      (chartClick)="chartClicked($event)">
+      [plugins]="lineChartPlugins"    
+    </canvas>
+
+    <div class="row" >
+          <div class="col-md-8 mt-8">
+              <table class="table">
+                  <thead>
+                    <tr  class="gridtable" >
+                      <th scope="col">Cambios</th>
+                      <th scope="col-mt-8">Datos</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Cambio por: </th>
+                      <td  class="select" >
+                        {{arrayTemp[clickedIndex].by}}
+                      </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Temperatura: </th>
+                        <td  class="select" >
+                          {{arrayTemp[clickedIndex].temperature}}
+                        </td>
+                      </tr>
+                    <tr>
+                      <th scope="row">Hora: </th>
+                      <td  class="select"  >
+                        {{arrayTemp[clickedIndex].time}}
+                      </td>
+
+                    </tr>
+                    
+                    
+
+                  </tbody>
+                  
+                  <button  class="btn btn-info mt-2" style="margin-left: 100%; width: 120px;" id="btnAgregar" (click)="tempShowSelect = 0">
+                    Aceptar
+                  </button>
+                </table>
+                
+          </div>
+      </div>
+      
+    </div>
+  </div>   
+    
+<div style="width: 40%;" *ngIf="stateShowSelect == 1 && tempShowSelect == 0">
+  
+  
+ 
+  <strong class="mt-2">Día: </strong>
+  <input type="date" id="start" name="trip-start" [(ngModel)]="dateB"
+    min="2022-01-01" max="2022-12-31" (change)="onChangeDate(idUser,clickedIndex)">
+
+  <div class="row mt-4">
+    <strong>Variación de Encendidos y Apagados:</strong> 
+  </div>
+  <canvas class="chart-wrapper" 
+    baseChart
+    [legend]="true"
+    [datasets]="chartData"
+    [labels]="chartLabels"
+    [options]="chartOptions"
+    [type] = "'line'"
+    (chartClick)="chartClicked($event)">
+    [plugins]="lineChartPlugins" 
+  </canvas>
+
+  <div class="row" >
+        <div class="col-md-8 mt-8">
+            <table class="table">
+                <thead>
+                  <tr  class="gridtable" >
+                    <th scope="col">Cambios</th>
+                    <th scope="col-mt-8">Datos</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Cambio por: </th>
+                    <td  class="select" >
+                      {{arrayState[clickedIndex].by}}
+                    </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Estado: </th>
+                      <td  class="select" *ngIf="arrayState[clickedIndex].state == 0" style="color: red;">
+                        Apagado
+                      </td>
+                      <td  class="select" *ngIf="arrayState[clickedIndex].state == 1" style="color: green;">
+                        Encendido
+                      </td>
+                    </tr>
+                  <tr>
+                    <th scope="row">Hora: </th>
+                    <td  class="select"  >
+                      {{arrayState[clickedIndex].time}}
+                    </td>
+
+                  </tr>
+                  
+                  
+
+                </tbody>
+                
+                <!-- <div >
+                    Variación de Tiempo encendido:
+                    <canvas baseChart
+                            [datasets]="radarChartData"
+                            [labels]="radarChartLabels"
+                            [type]="'radar'"></canvas>
+                  </div> -->
+                <div >
+                  Variación de Tiempo encendido:
+                  <canvas baseChart
+                          [datasets]="radarChartData"
+                          [labels]="radarChartLabels"
+                          [type]="'radar'"></canvas>
+                </div>
+                <button  class="btn btn-info mt-2" style="margin-left: 100%; width: 120px;" id="btnAgregar" (click)="stateShowSelect = 0">
+                  Aceptar
+                </button>
+              </table>
+              
+        </div>
+    </div>
+    
+  </div>
+   

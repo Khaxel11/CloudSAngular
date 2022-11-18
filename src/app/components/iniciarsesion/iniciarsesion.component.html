@@ -1,0 +1,73 @@
+
+    
+    
+    <div class="contenido mt-12 cubo">
+        <div class="cabecera">
+        
+            <label style="margin-left: 20px; margin-top: 10px; font-size: 30px;">CloudS</label>
+            
+        </div>
+        <br>
+        <div id="Contenido" class="container-fluid">
+
+    <div class="row mx-auto">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-7">
+                    <label class="text-left" >ID USUARIO:</label>
+                    <input class="form-control" id="id" type="text" name="id" [(ngModel)]="userData.id" maxlength="100"> 
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label for="txtNombre" class="text-left" >Username: </label>
+                    <input class="form-control" id="te" type="text" name="password" [(ngModel)]="userData.username" maxlength="100"> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label for="txtNombre" class="text-left" >Password: </label>
+                    <input class="form-control" id="password" type="password" name="password" [(ngModel)]="userData.password" maxlength="100"> 
+                </div>
+            </div>
+            
+          
+        </div>
+        <div class="row">
+            <div class="col-md-5 mt-2">
+                <label for="txtDepartamento" class="text-left" >¿No tienes cuenta? Registrate <a [routerLink]="['/register']" [routerLinkActive]="['actived']">Aqui</a></label>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 " style="margin-top: 40px;">
+                <button  class="btn btn-success float-md-right" id="btnAgregar" fragment="devices" (click)="iniciarSesion(userData.id)">
+                    <i class="fas fa-print" style="margin-right: 5px;"></i>
+                    Iniciar Sesión
+                  </button>
+                  
+                  <!-- [routerLink]="['/devices']"  -->
+            </div>
+        </div>
+        <div>
+            <div class="col-md-5 mt-2 alert alert-info" *ngIf="status == 1">
+                <p>Datos Incorrectos<p>
+            </div>
+            <div class="col-md-5 mt-2 alert alert-info" *ngIf="status == 2">
+                <p>Faltan Campos<p>
+            </div>
+        </div>
+    
+</div>
+</div>
+<div class="Pie">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xs-12 col-md-12 text-center ">
+                <small>IOT</small>
+            </div>
+        </div>
+    </div>
+</div>
+

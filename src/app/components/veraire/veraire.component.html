@@ -1,0 +1,112 @@
+<div class="container mt-2 mb-3">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <h2 for="txtDepartamento" class="text-left" >Tus Dispositivos:</h2>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mt-2">
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" *ngFor="let _ro of _room; let indice = index">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="ms-2 c-details" >
+                        <h6 class="mb-0">Habitación</h6> 
+                        <h4 >{{_room[indice].place}}</h4>
+                        <h6 class="mb-0">Estado Configuración:</h6>
+                        <span *ngIf="_room[indice].placeState==2" style="color: blue;">Manual</span>
+                        <span *ngIf="_room[indice].placeState==1" style="color: blue;">Encendidos</span>
+                        <span *ngIf="_room[indice].placeState==0" style="color: blue;">Apagados</span>
+                        <h6 class="heading">Temperatura Promedio:</h6>  
+                        <h3 class="heading">{{tempProm[indice]}}</h3>
+                        <h6 class="heading">Dispositivos:</h6>  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" *ngFor="let _rd of _roomDev; let indice = index"> <!--For-->
+                        <div class="card p-3 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <div class="ms-2 c-details" >
+                                    <h6 class="mb-0">id</h6> 
+                                    <span >{{_roomDev[indice].id}}</span>
+                                    
+                                    <h6 class="mb-0">Estado:</h6>
+                                    <span *ngIf="_roomDev[indice].state == 0" style="color: green;">Online</span>
+                                    <span *ngIf="_roomDev[indice].state == 1" style="color: red;">Offline</span>
+                                    <!-- <p *ngIf="_roomDev[indice].state==0; else on" style="color: red;">Apagado</p>
+                                        <ng-template #on><p style="color: green;">Encendido</p></ng-template> -->
+                                    <div class="mt-2">
+                                        <h6 class="heading">Temperatura:</h6>  
+                                        <div style="margin-left: 50px ;">
+                                            <circle-progress *ngIf="_roomDev[indice].temperature > 32"
+                                            [percent]= "_roomDev[indice].temperature"
+                                            [radius]="50"
+                                            [outerStrokeWidth]="10"
+                                            [innerStrokeWidth]="8"
+                                            [outerStrokeColor]="'#FC0101'"
+                                            [innerStrokeColor]="'#F87070'"
+                                            [animation]="true"
+                                            [animationDuration]="300"
+                                            [subtitle] = "'Temperatura'"
+                                            [units]="_roomDev[indice].scale"
+                                            [renderOnClick] = false
+                                          ></circle-progress>
+                                          <circle-progress *ngIf="_roomDev[indice].temperature >= 25 && _roomDev[indice].temperature <=32"
+                                            [percent]= "_roomDev[indice].temperature"
+                                            [radius]="50"
+                                            [outerStrokeWidth]="10"
+                                            [innerStrokeWidth]="8"
+                                            [outerStrokeColor]="'#0DA001'"
+                                            [innerStrokeColor]="'#79F56D'"
+                                            [animation]="true"
+                                            [animationDuration]="300"
+                                            [subtitle] = "'Temperatura'"
+                                            [units]="_roomDev[indice].scale"
+                                            [renderOnClick] = false
+                                          ></circle-progress>
+                                          <circle-progress *ngIf="_roomDev[indice].temperature > 0 && _roomDev[indice].temperature <25"
+                                            [percent]= "_roomDev[indice].temperature"
+                                            [radius]="50"
+                                            [outerStrokeWidth]="10"
+                                            [innerStrokeWidth]="8"
+                                            [outerStrokeColor]="'#0d4385'"
+                                            [innerStrokeColor]="'#6da3e6cc'"
+                                            [animation]="true"
+                                            [animationDuration]="300"
+                                            [subtitle] = "'Temperatura'"
+                                            [units]="_roomDev[indice].scale"
+                                            [renderOnClick] = false
+                                          ></circle-progress>
+                                          
+                                          
+                                          
+                                        </div>
+                                        
+                                          
+                                          <h6 class="mb-0">Ultimo Cambio</h6> 
+                                          <span >{{_roomDev[indice].lastChange}}</span>
+                                        
+                                      </div>
+            
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>

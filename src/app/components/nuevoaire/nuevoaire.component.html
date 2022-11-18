@@ -1,0 +1,34 @@
+<div class="container">
+    <h2></h2>
+    <div class="message success" *ngIf="status == 0"> El Usuario Se Ha Creado Con exito. </div>
+    <div class="message failed" *ngIf="status == 1"> ERROR: El Usuario no se ha podido crear</div>
+
+    <div class="message failed" *ngIf="status == 1"> ERROR: El Usuario no se ha podido crear</div>
+
+    <form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+        <p>
+            <label for="Username">Username</label>
+            <input type="text" name="Username" #Username="ngModel" [(ngModel)]="use.Username" required/>
+        </p>
+        <p>
+            <label for="Password">Password</label>
+            <input type="password" name="Password" #Password="ngModel" [(ngModel)]="use.Password" required/>
+        </p>
+        <p>
+            <label for="PasswordConfirm">Password</label>
+            <input type="password" name="PasswordConfirm" required/>
+            
+        </p>
+        <p>
+            <label for="Email">Email</label>
+            <input type="email" name="Email" #Email="ngModel" [(ngModel)]="use.Email" required/>
+        </p>
+        
+        <p>
+           
+        <input type="submit" value="Enviar" [disabled]="!projectForm.form.valid">
+    </form>
+</div>
+
+
+    

@@ -1,0 +1,392 @@
+<h3 class="mt-4" style="margin-left: 30px;">Usuario: {{idUser}} </h3>
+<h4 style="margin-left: 30px;">Nombre: {{username}}</h4>
+<h5 class="text-center">Dispositivos</h5>
+<div class="container mt-2 mb-3">
+  <div class="row" >
+    
+    <div class="col-md-1 mt-3" *ngIf="clickNewDevice != 9 ">
+      <h6 class="mb-0">ID:</h6> 
+
+    </div>
+    <div class="col-md-10 mt-2" *ngIf="clickNewDevice != 9 ">
+      <input class="form-control" id="text" type="text" name="text" maxlength="100" [(ngModel)]="newIdDevice"> 
+    </div>
+    <div class="col-md-1 mt-2" *ngIf="clickNewDevice != 9 ">
+      <button  class="btn btn-success text-center" id="btnAgregar" fragment="devices" (click)="getAires(newIdDevice)" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+        </button>
+    </div>
+  </div>
+  
+  <div class="row mt-4" *ngIf="clickAddDevice != 9 ">
+    <h6 class="mb-4">Dispositivos Disponibles</h6>
+    <div class="card p-3 mb-2">
+      <div class="d-flex justify-content-between">
+        <div class="ms- c-details" >
+          <h6 class="mb-0">ID:</h6> 
+          <span >{{_aire.deviceID}}</span>
+        </div>
+        <div class="ms- c-details" >
+          <h6 class="mb-0">User</h6> 
+          <span >{{_aire.userID}}</span>
+        </div>
+        <div class="ms- c-details" >
+          <h6 class="mb-0">Modelo</h6> 
+          <span >{{_aire.modelo}}</span>
+        </div>
+        <button  class="btn btn-success text-center" id="btnAgregar" fragment="devices" (click)="setDataDevice()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+          </svg>
+          </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-12" *ngIf="clickSelectDevice != 9">
+    <div>    <h6 class="mb-4">Agregar Dispositivo</h6>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="ms- c-details" >
+        <h6 class="mb-0">Usuario:</h6> 
+      <span >{{idUser}}</span>
+      </div>
+      <div class="ms- c-details" >
+        <h6 class="mb-0">ID Dispositivo:</h6> 
+        <span >{{newIdDevice}}</span>
+      </div>
+      <div class="ms- c-details" >
+        <h6 class="mb-0">Habitación:</h6> 
+        <select class="form-select mt-2" aria-label="Default select example" [(ngModel)]="selectRoomIndex">
+          <option value="{{selectRoomIndex}}" *ngFor="let item of dataRoom; let indice = index">{{dataRoom[indice]}}</option>
+        </select>
+    </div>
+      <div>
+      <button  class="btn btn-success text-center mt-4" id="btnAgregar" fragment="devices" (click)="saveDevice(selectRoomIndex)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>        </button>
+    </div>
+    <!--  -->
+    
+  </div>
+ 
+</div>
+<div class="container mt-2 mb-3">
+  <div class="row">
+    
+    <div class="col-md-1 mt-3">
+      
+
+    </div>
+    <div class="col-md-10 mt-2">
+    </div>
+    <div class="col-md-1 mt-2">
+      <button  class="btn btn-success text-center" id="btnAgregar" fragment="devices" (click)="clickNewDev()" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cloud-plus-fill" viewBox="0 0 16 16">
+          <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm.5 4v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+        </svg>
+        </button>
+    </div>
+  </div>
+  
+<div class="row mt-4">
+  <!-- <div class="col-md-12" *ngFor="let _ro of arrayDev; let indice = index"> -->
+      <!-- <div class="card p-3 mb-2"> -->
+          
+          <div class="row" >
+              <div class="col-md-4" *ngFor="let _rd of arrayDev; let indice = index"> <!--For-->
+                  <div class="card p-3 mb-2">
+                      <div class="d-flex justify-content-between">
+                          <div class="ms-2 c-details" >
+                              <h6 class="mb-0">id</h6> 
+                              <span >{{arrayDev[indice].id}}</span>
+                              <h6 class="mb-0">Lugar</h6> 
+                              <span >Oficina</span>
+                              <h6 class="mb-0">Estado:</h6>
+                              <span *ngIf="arrayDev[indice].state == 0" style="color: green;">Online</span>
+                              <span *ngIf="arrayDev[indice].state == 1" style="color: red;">Offline</span>
+                              <!-- <p *ngIf="_roomDev[indice].state==0; else on" style="color: red;">Apagado</p>
+                                  <ng-template #on><p style="color: green;">Encendido</p></ng-template> -->
+                              <div class="mt-2">
+                                  <h6 class="heading">Temperatura:</h6>  
+                                  <div class="text-center">
+                                    <button type="button" class="btn btn-success" (click)="minTemperature(indice)" *ngIf="arrayDev[indice].state==1">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                                      </svg>
+                                      </button> 
+                                      <circle-progress class="text-center" *ngIf="arrayDev[indice].temperature > 32"
+                                        [percent]= "arrayDev[indice].temperature"
+                                        [radius]="50"
+                                        [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="8"
+                                        [outerStrokeColor]="'#FC0101'"
+                                        [innerStrokeColor]="'#F87070'"
+                                        [animation]="true"
+                                        [animationDuration]="300"
+                                        [subtitle] = "'Temperatura'"
+                                        [units]="arrayDev[indice].scale"
+                                        [renderOnClick] = false
+                                      ></circle-progress>
+                                      <circle-progress class="text-center" *ngIf="arrayDev[indice].temperature >= 25 && arrayDev[indice].temperature <=32"
+                                        [percent]= "arrayDev[indice].temperature"
+                                        [radius]="50"
+                                        [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="8"
+                                        [outerStrokeColor]="'#0DA001'"
+                                        [innerStrokeColor]="'#79F56D'"
+                                        [animation]="true"
+                                        [animationDuration]="300"
+                                        [subtitle] = "'Temperatura'"
+                                        [units]="arrayDev[indice].scale"
+                                        [renderOnClick] = false
+                                      ></circle-progress>
+                                      
+                                      <circle-progress class="text-center" *ngIf="arrayDev[indice].temperature > 0 && arrayDev[indice].temperature <25"
+                                          [percent]= "arrayDev[indice].temperature"
+                                          [radius]="50"
+                                          [outerStrokeWidth]="10"
+                                          [innerStrokeWidth]="8"
+                                          [outerStrokeColor]="'#0d4385'"
+                                          [innerStrokeColor]="'#6da3e6cc'"
+                                          [animation]="true"
+                                          [animationDuration]="300"
+                                          [subtitle] = "'Temperatura'"
+                                          [units]="arrayDev[indice].scale"
+                                          [renderOnClick] = false
+                                        ></circle-progress>
+                                      <button type="button" class="btn btn-success" (click)="plusTemperature(indice)" *ngIf="arrayDev[indice].state==1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                        </svg>
+                                        </button>
+                                    
+                                    
+                                    
+                                  </div>
+                                  
+                                    
+                                    
+                                  
+                                </div>
+                                <div class="text-center">
+                                  <h6>Estado</h6>
+                                  <p *ngIf="arrayDev[indice].state==0; else on" style="color: red;">Apagado</p>
+                                    <ng-template #on><p style="color: green;">Encendido</p></ng-template>
+                                </div>
+                                <div>
+                                  <button type="button" class="btn btn-success botonestado" *ngIf="arrayDev[indice].state==0;" (click)="turnDevice(indice, 1)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                                      <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                                    </svg>
+                                    
+                                    </button>
+                                  <button type="button" class="btn btn-danger  botonestado " *ngIf="arrayDev[indice].state==1;" (click)="turnDevice(indice, 0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16">
+                                      <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
+                                    </svg>
+                                    </button>
+        
+                                    <button  class="btn btn-info" style="margin-left: 20px;" id="btnAgregar" (click)="getProgramabilityFromDevice(indice, indice)">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                                      </svg>
+                                      
+                                    </button>
+                                </div>
+      
+                          </div>
+                          
+                      </div>
+                      
+                      
+                  </div>
+                  
+              </div>
+              
+              
+          </div>
+          
+          
+      <!-- </div> -->
+  <!-- </div> -->
+</div>
+
+<!-- <ul>
+
+ 
+        <div class="row">
+            <div class="col-md-11 mt-2">
+                <table class="table">
+                    <thead>
+                      <tr  class="gridtable" >
+                        <th scope="col">Aires</th>
+                        <th scope="col" class="select" *ngFor="let devic of arrayDev; let indice = index">#{{indice+1}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">#ID</th>
+                        <td  class="select"  *ngFor="let devic of arrayDev">{{devic.id}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Temperatura</th>
+                        
+                        <td *ngFor="let devic of arrayDev; let indice = index; ">
+                          <button type="button" class="btn btn-success" (click)="minTemperature(indice)" *ngIf="devic.state==1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                          </svg>
+                          </button> 
+                          <circle-progress *ngIf="devic.temperature > 32"
+                            [percent]= "devic.temperature"
+                            [radius]="70"
+                            [outerStrokeWidth]="10"
+                            [innerStrokeWidth]="8"
+                            [outerStrokeColor]="'#FC0101'"
+                            [innerStrokeColor]="'#F87070'"
+                            [animation]="true"
+                            [animationDuration]="300"
+                            [subtitle] = "'Temperatura'"
+                            [units]="devic.scale"
+                            [renderOnClick] = false
+                          ></circle-progress>
+                          <circle-progress *ngIf="devic.temperature >= 25 && devic.temperature <=32"
+                            [percent]= "devic.temperature"
+                            [radius]="70"
+                            [outerStrokeWidth]="10"
+                            [innerStrokeWidth]="8"
+                            [outerStrokeColor]="'#0DA001'"
+                            [innerStrokeColor]="'#79F56D'"
+                            [animation]="true"
+                            [animationDuration]="300"
+                            [subtitle] = "'Temperatura'"
+                            [units]="devic.scale"
+                            [renderOnClick] = false
+                          ></circle-progress>
+                          
+                          <circle-progress *ngIf="devic.temperature > 0 && devic.temperature <25"
+                              [percent]= "devic.temperature"
+                              [radius]="70"
+                              [outerStrokeWidth]="10"
+                              [innerStrokeWidth]="8"
+                              [outerStrokeColor]="'#0d4385'"
+                              [innerStrokeColor]="'#6da3e6cc'"
+                              [animation]="true"
+                              [animationDuration]="300"
+                              [subtitle] = "'Temperatura'"
+                              [units]="devic.scale"
+                              [renderOnClick] = false
+                            ></circle-progress>
+                          <button type="button" class="btn btn-success" (click)="plusTemperature(indice)" *ngIf="devic.state==1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                            </button>
+                            
+                        </td>
+                        <button type="button" class="btn btn-success botonestado" *ngIf="devic.state==0;" (click)="turnDevice(indice, 1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                              <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                            </svg>
+                            Encender
+                            </button>
+                          <button type="button" class="btn btn-danger ml-1 botonestado " *ngIf="devic.state==1;" (click)="turnDevice(indice, 0)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16" style="text-align: left; ">
+                              <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
+                            </svg>
+                            Apagar</button>
+
+                            <button  class="btn btn-info" style="margin-left: 20px;" id="btnAgregar" (click)="getProgramabilityFromDevice(indice, indice)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                              </svg>
+                              Configurar
+                            </button>
+                      </tr>
+                      
+                      <tr>
+                        <th scope="row">Estado</th>
+                        <td *ngFor="let devic of arrayDev"><p *ngIf="devic.state==0; else on" style="color: red;">Apagado</p>
+                            <ng-template #on><p style="color: green;">Encendido</p></ng-template></td>
+                      </tr>
+                      <tr>
+                        <th scope="row" ></th>
+                        <td *ngFor="let devic of arrayDev; let indice = index">
+                          <button type="button" class="btn btn-success botonestado" *ngIf="devic.state==0;" (click)="turnDevice(indice, 1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-on" viewBox="0 0 16 16">
+                              <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                            </svg>
+                            Encender
+                            </button>
+                          <button type="button" class="btn btn-danger ml-1 botonestado " *ngIf="devic.state==1;" (click)="turnDevice(indice, 0)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-toggle-off" viewBox="0 0 16 16" style="text-align: left; ">
+                              <path d="M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z"/>
+                            </svg>
+                            Apagar</button>
+
+                            <button  class="btn btn-info" style="margin-left: 20px;" id="btnAgregar" (click)="getProgramabilityFromDevice(indice, indice)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                              </svg>
+                              Configurar
+                            </button>
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="configWasSelected == 3">
+          <div class="col-md-4 mt-2">
+              <table class="table">
+                  <thead>
+                    <tr  class="gridtable" >
+                      <th scope="col">Configurar</th>
+                      <th scope="col">Datos</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Encender a: </th>
+                      <td  class="select" >
+                        <input type="time" name="horaalerta" value="{{program.onat}}" [(ngModel)]='onattime' >
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Apagar a: </th>
+                      <td  class="select"  >
+                        <input type="time" name="horaalerta" value="{{program.offat}}" [(ngModel)]='offattime'>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <th scope="row">En linea: </th>
+                      <td  class="select" >{{program.online}}
+                        <a *ngIf="program.online == 'Online'" style="color: rgb(0, 255, 0); font-size: 20px;">•</a>
+                        <a *ngIf="program.online == 'Offline'" style="color: rgb(255, 0, 0); font-size: 20px;">•</a>
+
+                      </td>
+
+                    </tr>
+                    
+
+                  </tbody>
+                  <button  class="btn btn-info mt-2" style="margin-left: 100%; width: 120px;" id="btnAgregar" (click)="updateProgramability()">
+                    Aceptar
+                  </button>
+                  
+                </table>
+                
+          </div>
+      </div>
+
+</ul> -->

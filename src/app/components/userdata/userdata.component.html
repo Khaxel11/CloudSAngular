@@ -1,0 +1,226 @@
+
+    
+    
+    <div class="contenido mt-1 cubo">
+        <div class="cabecera">
+        
+            <label style="margin-left: 20px; margin-top: 10px; font-size: 30px;">Datos de Usuario</label>
+            
+        </div>
+        <br>
+        <div id="Contenido" class="container-fluid">
+
+    <div class="row mx-auto">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-10">
+                    <label class="text-left" >Id Usuario: {{idUser}}</label>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label for="txtNombre" class="text-left" >Username: {{name}}</label>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <label for="txtNombre" class="text-left" > Rol:
+                        <label *ngIf="rol == 0">Administrador</label>
+                        <label *ngIf="rol == 1">Usuario</label>
+                        <label *ngIf="rol == 2">Invitado</label>
+                        <label *ngIf="rol == 3">Niño</label>
+                        
+                    </label>
+                    
+                </div>
+            </div>
+            <div class="mt-4 d-flex">
+                <!-- <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices">
+                    <i class="fas fa-print" style="margin-right: 5px;"></i>
+                    Modificar
+                  </button> -->
+            </div>
+          
+        </div>
+        
+        
+    
+</div>
+
+<!-- CARDS -->
+<div class="container mt-2 mb-3">
+    <div class="row">
+        <div class="col-md-10 mt-2">
+            <label for="txtDepartamento" class="text-left" >Perfiles:</label>
+        </div>
+        <div class="col-md-1 mt-1" *ngIf="rol == 0">
+            <button  class="btn btn-success text-center" id="btnAgregar" fragment="devices" (click)="clickAdd()" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
+              </button>
+        </div>
+        <div class="col-md-1 mt-1" *ngIf="rol == 0">
+            <button  class="btn btn-danger text-center" id="btnAgregar" fragment="devices">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  </svg>
+              </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5 mt-2">
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let users of alluser; let indice = index">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="ms-2 c-details" *ngIf="configClick == 1 || indice != indexConfig">
+                        <h6 class="mb-0">Rol:</h6> 
+                        <span *ngIf="alluser[indice].rol == 0">Administrador</span>
+                        <span *ngIf="alluser[indice].rol == 1">Usuario</span>
+                        <span *ngIf="alluser[indice].rol == 2">Invitado</span>
+                        <span *ngIf="alluser[indice].rol == 3">Niño</span>
+                        <h6 class="mb-0">Estado:</h6>
+                        <span *ngIf="alluser[indice].online == 0" style="color: red;">Offline</span>
+                        <span *ngIf="alluser[indice].online == 1" style="color: green;">Online</span>
+
+                    </div>
+                    <!-- Modificar rol -->
+                    <div class="ms-2 c-details" *ngIf="configClick == 2 && indice == indexConfig">
+                        <h6 class="mb-0">Rol:</h6> 
+                       
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="updUser.rol" >
+                            <!-- <option default class="option" value="alluser[indice].rol">Rol de Usuario</option> -->
+                            
+
+                            <option value="0"> Administrador </option>
+                            <option value="1">Usuario</option>
+                            <option value="2">Invitado</option>
+                            
+                        </select>
+
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="ms-2 c-details">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="mt-5">
+                    <h4 *ngIf="configClick == 2 && indice == indexConfig">Cambiar Nombre:</h4>
+                    <input class="form-control" id="te" type="text" name="password" maxlength="100" [(ngModel)]="updUser.username" *ngIf="configClick == 2 && indice == indexConfig"> 
+                    <h3 class="heading" *ngIf="configClick == 1 || indice != indexConfig">{{alluser[indice].username}}</h3>
+                    <div class="mt-5" *ngIf="configClick == 1 || indice != indexConfig">
+                        <!-- <h6 class="mb-0">ROL:</h6>  -->
+                        <h6 class="mb-0">Preferencias</h6>
+                        <span *ngIf="alluser[indice].estado == 0">Normal</span>
+                        <span *ngIf="alluser[indice].estado == 1">Enfermo</span>
+                        <span *ngIf="alluser[indice].estado == 2">Adulto Mayor</span>
+                        <span *ngIf="alluser[indice].estado == 3">Niño</span>
+                        
+                        
+                    </div>
+                    <div class="mt-4" *ngIf="configClick == 2 && indice == indexConfig">
+                        
+                        <h6 class="mb-0">Preferencias</h6>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="updUser.estado">
+                            
+                            <option value="0">Normal</option>
+                            <option value="1">Enfermo</option>
+                            <option value="2">Adulto Mayor</option>
+                            <option value="3">Niño</option>
+                        </select> 
+                    </div>
+
+                    
+                    <div class="mt-4 d-flex justify-content-center" *ngIf="rol == 0 && configClick == 1 || indice != indexConfig">
+                        <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices" (click)="clickConfig(indice)">
+                            <i class="fas fa-print" style="margin-right: 5px;"></i>
+                            Configurar
+                          </button>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center" *ngIf="rol == 0 && configClick == 2 && indice == indexConfig">
+                        <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices" (click)="updateUser(idUser,indice)">
+                            <i class="fas fa-print" style="margin-right: 5px;"></i>
+                            Aceptar
+                          </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"  *ngIf="clickOnAdd == 1">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="ms-2 c-details">
+                        <h6 class="mb-0">Rol:</h6>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="newUser.rol">
+                            <!-- <option selected = "rol">Rol de Usuario</option> -->
+                            <option value="0"> Administrador </option>
+                            <option value="1">Usuario</option>
+                            <option value="2">Invitado</option>
+                        </select>
+
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="mt-4 ms-2 c-details">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                              </svg>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="mt-4">
+                    <h3 class="heading">Nombre:</h3>
+                    <input class="form-control" id="te" type="text" name="password" maxlength="100" [(ngModel)]="newUser.username"> 
+                    <div class="mt-5">
+                        
+                        <h6 class="mb-0">Preferencias</h6>
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="newUser.estado">
+                            <option selected>Estado de Salud</option>
+                            <option value="0">Normal</option>
+                            <option value="1">Enfermo</option>
+                            <option value="2">Adulto Mayor</option>
+                            <option value="3">Niño</option>
+                        </select> 
+                    </div>
+                    <div class="mt-3 d-flex justify-content-center" *ngIf="rol == 0" (click) = "addUser(idUser)">
+                        <button  class="btn btn-success float-md-right text-center" id="btnAgregar" fragment="devices">
+                            <i class="fas fa-print" style="margin-right: 5px;"></i>
+                            Aceptar
+                          </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- FOOTER -->
+</div>
+<!-- <div class="Pie">
+    <div class="container">
+        <div class="row ">
+            <div class="col-xs-12 col-md-12 text-center ">
+                <small>IOT</small>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- ADD -->
+
+    
+    
