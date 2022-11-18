@@ -11,14 +11,23 @@ var multipart = require('connect-multiparty');
 router.get('/home', ProjectController.home);
 router.post('/test', ProjectController.test);
 router.post('/save-aire', ProjectController.saveAire);
+//obtener un aire
 router.get('/aire/:id?', ProjectController.getAire);
+//ver si existe un aire
 router.get('/aire-exist/:id?', ProjectController.getAireExist);
+//Metodo para agregar dispositivo a usuario
 router.put('/aire-user/:id?/:idDevice?', ProjectController.putUserAire);
+//AGREGAR AIRE A USUARIO
 router.put('/new-device/:id?/:idDevice?/:indexroom?', ProjectController.putNewDeviceToUser)
+//Todos los aires
 router.get('/Aires', ProjectController.getAires);
+//Mandar correo
 router.post('/envio', ProjectController.sendCorreo);
+//guardar usuario
 router.post('/save-user', ProjectController.saveUser);
+//obtener usuario
 router.get('/get-user/:id?', ProjectController.getUser);
+
 router.get('/get-devices/:id?', ProjectController.getDevices);
 router.get('/get-devices-room/:id?/', ProjectController.getDevicesFromRoom);
 router.get('/get-devices-from-user/:id?/:device?', ProjectController.getDevicesFromUser);
@@ -41,7 +50,11 @@ router.put('/set-new-temperature-change/:id?/:device?/:month?/:day?', ProjectCon
 router.put('/set-new-state-change/:id?/:device?/:month?/:day?', ProjectController.setNewEstateChange);
 router.put('/update-user/:id?/:index?', ProjectController.setUpdateToUser);
 router.get('/get-all-analytics/:id?/:iddevice?', ProjectController.getAllAnalytics);
+router.put('/delete-profile/:id?/:indexUser?', ProjectController.deleteProfileFromUser);
+router.get('/drop-profile/:id?/:index?', ProjectController.dropUser);
+
 router.get('/borrar/:id?/:iddevice?/:indexroom?', ProjectController.setDevicesToRoom);
+
 /*router.put('/project/:id', ProjectController.updateProject);
 router.delete('/project/:id', ProjectController.deleteProject);
 router.post('/upload-image/:id', multipartMiddleware, ProjectController.uploadImage);

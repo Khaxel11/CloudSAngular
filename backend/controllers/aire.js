@@ -476,6 +476,52 @@ var controller = {
 		
 		});
 	},
+	deleteProfileFromUser: function(req, res){
+		var userId2 = req.params.id;
+		var on1;
+		var indexToDelete = Number(req.params.indexUser);
+		if(userId2 == null) return res.status(404).send({message: 'El user no existe.'});
+		user.findById(userId2, (err, userr) => {
+			if(err) return res.status(500).send({message: 'Error al devolver los datos.'});
+			if(!userr) return res.status(404).send({message: 'El usuario no existe.'});
+			if(res.status(200)){
+				var newUserObj = {
+					username : String,
+					rol : Number,
+					estado : Number,
+					online : String
+				}
+				var one = JSON.stringify(userr);
+				on1 = JSON.parse(one, newUserObj);
+
+				var deletedUser = [];
+				for(let i = 0; i < on1.Username.length; i++){
+					
+					if(i != indexToDelete){
+						//console.log(on1[i]);
+						deletedUser.push(on1.Username[i]);
+					}else{
+						
+					}
+				}
+				on1.Username = deletedUser;
+				user.findByIdAndUpdate(userId2, on1, (err, deviceUpdate)=>{
+					if(err) return res.status(500).send({message: 'Error al actualizad estado'});
+		
+					if(!deviceUpdate) return res.status(404).send({message: 'No existe estado'});
+					if(res.status(200)){
+						return res.status(200).send(deviceUpdate);
+					}
+					
+				});
+
+			}
+			
+
+		});
+		
+		
+	},
 	getDevicesFromRoom: function(req, res){
 
 		var userId2 = req.params.id;
@@ -1115,7 +1161,7 @@ var controller = {
 			online : String
 		}
 
-		var theUser = JSON.parse(newUserJson, newUserObj);
+		
 
 		if(userId2 == null) return res.status(404).send({message: 'El user no existe.'});
 
@@ -1144,14 +1190,15 @@ var controller = {
 					online : parseInt(newUser.online)
 				}
 				var allUsersFromMONGO = JSON.parse(mongoUser, allUsers);
-
+				var theUser = JSON.parse(newUserJson, newUserObj);
 				var lengthFromUser = Object.keys(allUsersFromMONGO.Username).length;
 				allUsersFromMONGO.Username[lengthFromUser] =  theNewUser;
-				//console.log(lengthFromUser);
-				//console.log(theNewUser);
-				//console.log(allUsersFromMONGO);
+				console.log(lengthFromUser);
+				console.log(theNewUser);
+				console.log(theUser);
+				console.log(allUsersFromMONGO);
 
-				user.findByIdAndUpdate(userId2, allUsersFromMONGO, (err, userUpdate)=>{
+				/*user.findByIdAndUpdate(userId2, allUsersFromMONGO, (err, userUpdate)=>{
 					if(err) return res.status(500).send({message: 'Error al actualizad estado'});
 		
 					if(!userUpdate) return res.status(404).send({message: 'No existe estado'});
@@ -1159,7 +1206,7 @@ var controller = {
 					return res.status(200).send({
 						user : userUpdate
 					});
-				});
+				});*/
 			}
 		});
 	},

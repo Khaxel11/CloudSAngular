@@ -142,6 +142,12 @@ export class UserService{
         return this._http.get(this.url+"aire/"+id,{headers:headers});
     }
 
+    dropProfile(id : String, index : Number) : Observable <any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.put(this.url+"delete-profile/"+id+"/"+index,{headers:headers});
+    }
+
+
     addNewDevice (id : String, idDev : String, room : Number){
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.put(this.url+"new-device/"+id+"/"+idDev+"/"+room,{headers:headers});

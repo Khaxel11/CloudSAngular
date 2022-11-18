@@ -16,6 +16,7 @@ export class UserdataComponent implements OnInit {
 
   public roles : String[] = ["Seleccionar", "Administrador", "Usuario", "invitado"];
   public configClick : number;
+  public dropClick : Number = 9;
   public alluser : Username[];
   public idUser: String | null;
   public name : String | null;
@@ -91,6 +92,44 @@ export class UserdataComponent implements OnInit {
         console.log(<any>error);
       }
     )
+  }
+  
+  clickDropProfile(){
+    if(this.dropClick == 9){
+      this.dropClick = 1;
+    }else{
+      this.dropClick = 9;
+  }
+}
+  dropUser (id : String | null, index : Number){
+    swal.fire({
+      title: 'Estas seguro?',
+      text: "Esta accion es irreversible, el perfil se borrara!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._userService.dropProfile(id as String, index).subscribe(
+          response =>{
+            this.getUser(id as String);
+            //this.clickOnAdd = 0;
+            this.dropClick = 9;  
+          },
+          error =>{
+            console.log(<any>error);
+          }
+          )
+        swal.fire(
+          'Eliminado!',
+          'El perfil ha sido eliminado.',
+          'success'
+        )
+      }
+    })
+    
   }
   clickAdd(){
     if(this.clickOnAdd == 1){
