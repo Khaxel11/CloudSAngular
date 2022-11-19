@@ -70,8 +70,10 @@ export class IniciarsesionComponent implements OnInit {
       response =>{
         this.use = response.user;
         
+        
         this.username = response.user.Username;
         console.log(this.username);
+        var exist = false;
         for(var i = 0; i < this.username.length ; i++){
           // console.log(i + " " + this.username[i].username);
            console.log(this.userData.username);
@@ -98,6 +100,7 @@ export class IniciarsesionComponent implements OnInit {
               
               window.open("http://localhost:4200/devices","_self");
               this.userOk = true;
+              exist = true;
               //console.log("Variable Session: " + sessionStorage.getItem('idUser'));
               //6358513ad81e6ca96b2d6eb1
             }else{
@@ -105,7 +108,7 @@ export class IniciarsesionComponent implements OnInit {
               swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Datos< Incorrectos'
+                text: 'Datos Incorrectos'
               })
               sessionStorage.clear();
               this.status = 1;
@@ -113,10 +116,18 @@ export class IniciarsesionComponent implements OnInit {
             }
             break;
           } else{
+            exist = false;
             this.userOk = false;
           }
+          
         }
-      
+      if(exist == false){
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Datoss Incorrectos'
+        })
+      }
         
         
     }, error =>{

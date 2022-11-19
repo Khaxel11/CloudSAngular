@@ -93,8 +93,7 @@ export class DevicesComponent implements OnInit {
     //console.log(this.idUser? this.idUser : "");
     this.getDevices(this.idUser? this.idUser : "");
     this.getRooms(this.idUser as String);
-    //this.getAires("63532231e7da17b5a779bee4");
-    //this.getProgramabilityFromDevice(0);
+
   }
   
   getAires(id : String){
