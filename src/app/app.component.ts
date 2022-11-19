@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Username } from 'src/app/models/username';
-import { User } from 'src/app/models/user';
-import { Device } from 'src/app/models/device';
-import { Analytics } from 'src/app/models/analytics';
-import { temperatureChange } from 'src/app/models/temperatureChange';
-import { stateChange } from 'src/app/models/stateChange';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import swal from'sweetalert2';
+
 
 @Component({
   selector: 'app-root',
@@ -26,19 +21,32 @@ export class AppComponent {
     index : Number = Number(sessionStorage.getItem('index'));
 
   setOnlineUser(){
-    //console.log(this.idUser);
-    this._userService.setNewStateToUser(String(this.idUser), 0, this.index).subscribe(
-      response =>{
-        console.log("Estado cambiado");
-        
-    }, error =>{
-      console.log(<any>error);
-      console.log("Datos Incorrectos");
-      //this.status = 1;
-      //this.status = 0;
-     // this.clearDataUser();
-      
-    });
+    swal.fire({
+      title: '¿Cerrar Sesión?',
+      //showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Cerrar Sesión',
+      icon : "warning"
+      //denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this._userService.setNewStateToUser(String(this.idUser), 0, this.index).subscribe(
+          response =>{
+            //console.log("Estado cambiado");
+            
+        }, error =>{
+          console.log(<any>error);
+          console.log("Datos Incorrectos");
+    
+          
+        });
+
+      } else if (result.isDenied) {
+        //swal.fire('Cancelado', '', 'info')
+      }
+    })
+   
   }
  
 }
