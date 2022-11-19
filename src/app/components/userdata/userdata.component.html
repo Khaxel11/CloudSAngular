@@ -101,7 +101,6 @@
                         <h6 class="mb-0">Rol:</h6> 
                        
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="updUser.rol" >
-                            <!-- <option default class="option" value="alluser[indice].rol">Rol de Usuario</option> -->
                             
 
                             <option value="0"> Administrador </option>
@@ -132,7 +131,6 @@
                     <input class="form-control" id="te" type="text" name="password" maxlength="100" [(ngModel)]="updUser.username" *ngIf="configClick == 2 && indice == indexConfig"> 
                     <h3 class="heading" *ngIf="configClick == 1 || indice != indexConfig">{{alluser[indice].username}}</h3>
                     <div class="mt-5" *ngIf="configClick == 1 || indice != indexConfig">
-                        <!-- <h6 class="mb-0">ROL:</h6>  -->
                         <h6 class="mb-0">Preferencias</h6>
                         <span *ngIf="alluser[indice].estado == 0">Normal</span>
                         <span *ngIf="alluser[indice].estado == 1">Enfermo</span>
@@ -175,7 +173,6 @@
                     <div class="ms-2 c-details">
                         <h6 class="mb-0">Rol:</h6>
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="newUser.rol">
-                            <!-- <option selected = "rol">Rol de Usuario</option> -->
                             <option value="0"> Administrador </option>
                             <option value="1">Usuario</option>
                             <option value="2">Invitado</option>
@@ -217,17 +214,7 @@
         </div>
 <!-- FOOTER -->
 </div>
-<!-- <div class="Pie">
-    <div class="container">
-        <div class="row ">
-            <div class="col-xs-12 col-md-12 text-center ">
-                <small>IOT</small>
-            </div>
-        </div>
-    </div>
-</div> -->
 
-<!-- ADD -->
 
     
     

@@ -115,7 +115,6 @@ export class UserdataComponent implements OnInit {
         this._userService.dropProfile(id as String, index).subscribe(
           response =>{
             this.getUser(id as String);
-            //this.clickOnAdd = 0;
             this.dropClick = 9;  
           },
           error =>{
@@ -154,10 +153,8 @@ export class UserdataComponent implements OnInit {
     }else{
       this.configClick = 1;  
     }
-    //console.log(this.configClick);
   }
   updateUser(id : String | null, index : Number){
-    //console.log(this.newUser);
     this._userService.updateUser(id,this.updUser, index).subscribe(
       response =>{
         this.getUser(id as String);
