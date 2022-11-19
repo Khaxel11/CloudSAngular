@@ -13,7 +13,7 @@ import { AnalyticsComponent } from "./components/analytics/analytics.component";
 //import { ErrorComponent } from "./components/error/error.component";
 
 const appRoutes: Routes=[
-    {path: '', component: HomeComponent},
+    {path: '', component: IniciarsesionComponent},
     {path: 'home', component: HomeComponent},
     {path: 'register', component: NuevoaireComponent},
     {path: 'iniciar-sesion', component: IniciarsesionComponent},

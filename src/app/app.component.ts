@@ -31,6 +31,7 @@ export class AppComponent {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        this.idUser = null;
         this._userService.setNewStateToUser(String(this.idUser), 0, this.index).subscribe(
           response =>{
             //console.log("Estado cambiado");
