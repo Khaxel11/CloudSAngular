@@ -8,8 +8,7 @@ const enviarCorreo = (req=request, resp=response) =>{
         host: 'smtp.gmail.com',
         post: 587,
         auth:{
-            user:'axel.aguilar216557@potros.itson.edu.mx',
-            pass: '59858Agu'
+           
         }
 
     });

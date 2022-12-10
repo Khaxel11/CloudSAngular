@@ -27,8 +27,7 @@ var controller = {
 			host: 'smtp.gmail.com',
 			post: 587,
 			auth:{
-				user:'agui.axel11@gmail.com',
-				pass: 'geoyzrnrmgikdyzf'
+				
 			}
 	
 		})
